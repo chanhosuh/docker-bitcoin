@@ -1,0 +1,11 @@
+# Eclipse
+.project
+.pydevproject
+
+# Mac
+**/.DS_Store
+
+# Misc
+*.log
+*.tmp
+*.swp
