@@ -13,13 +13,12 @@ help:
 	@echo "rebuild           Stop, build, then start containers"
 	@echo ""
 	@echo "DEBUGGING:"
-	@echo "logs              Re-attach to all logging output"
-	@echo "log               Re-attach to specified container log"
-	@echo "bash              Bash inside a container (default=bitcoind)"
+	@echo "logs              Re-attach to logging output"
+	@echo "bash              Bash inside bitcoind container"
 	@echo "status            Blockchain status info from bitcoind"
 	@echo ""
 	@echo "MAINTENANCE:"
-	@echo "clean		     Delete stopped containers and dangling images"
+	@echo "clean             Delete stopped containers and dangling images"
 	@echo ""
 
 .PHONY: build
@@ -52,24 +51,6 @@ rebuild:
 .PHONY: logs
 logs:
 	docker-compose logs -f 
-
-.PHONY: log
-log:
-	@if test -z $(name); then\
-	    echo "";\
-	    echo "Please enter a container name as argument.";\
-	    echo "";\
-	    echo " e.g. 'make log name=bitcoind'";\
-	    echo "";\
-	    echo "or use 'make logs' to attach to all container logs.";\
-	    echo "";\
-	    echo "Available container names are:";\
-	    echo "  bitcoind";\
-	    echo "  django";\
-	    echo "  db";\
-	else\
-	  docker-compose logs -f $(name);\
-	fi
 
 .PHONY: bash
 bash:
