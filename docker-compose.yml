@@ -10,7 +10,8 @@ services:
         stdin_open: true
         tty: true
         ports:
-            - "8000:8332"
+            - "8332:8332"
+            - "8333:8333"
 
 volumes:
     bitcoin-data:
