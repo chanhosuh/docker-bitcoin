@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
         autotools-dev \
         bsdmainutils \
         build-essential \
+        curl \
         git \
         make \
         python3 \
@@ -23,8 +24,21 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 
+# Clone source repo into bitcoin directory
 RUN git clone https://github.com/bitcoin/bitcoin.git
+
+
+# Need to get the latest stable release version;
+# luckily, GitHub provides a URL which will redirect to
+# a URL with the release version number.
+ENV release_url https://github.com/bitcoin/bitcoin/releases/latest
+RUN curl "${release_url}" -sLIo /dev/null -w '%{url_effective}' | grep -o '[^/]*$' > ./release_version
+RUN echo "*** release version: `cat ./release_version` ***"
+
+
+# Install latest release from cloned repo
 WORKDIR bitcoin
+RUN git checkout `cat ../release_version`
 RUN ./autogen.sh
 RUN ./configure --disable-wallet
 RUN make
