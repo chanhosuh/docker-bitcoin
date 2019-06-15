@@ -19,6 +19,7 @@ help:
 	@echo ""
 	@echo "MAINTENANCE:"
 	@echo "clean             Delete stopped containers and dangling images"
+	@echo "clean_logs        Truncate Docker logs"
 	@echo ""
 
 .PHONY: build
@@ -51,6 +52,11 @@ rebuild:
 .PHONY: logs
 logs:
 	docker-compose logs -f 
+
+# https://stackoverflow.com/a/51866793/1175053
+.PHONY: clean_logs
+clean_logs:
+	docker run -it --rm --privileged --pid=host alpine:latest nsenter -t 1 -m -u -n -i -- sh -c 'truncate -s0 /var/lib/docker/containers/*/*-json.log'
 
 .PHONY: bash
 bash:
