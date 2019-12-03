@@ -1,3 +1,5 @@
+[![chanhosuh/bitcoin][docker-pulls-image]][docker-hub-url] [![chanhosuh/bitcoin][docker-stars-image]][docker-hub-url] [![chanhosuh/bitcoin][docker-size-image]][docker-hub-url] [![chanhosuh/bitcoin][docker-layers-image]][docker-hub-url]
+
 # docker-bitcoin
 Docker setup to run a full node for Bitcoin
 
