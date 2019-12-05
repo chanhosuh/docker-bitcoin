@@ -40,14 +40,14 @@ RUN git clone https://github.com/bitcoin/bitcoin.git --branch `cat ../release_ve
 # Install latest release from cloned repo
  WORKDIR bitcoin
  RUN ./autogen.sh \
-    && ./configure CXXFLAGS="-O2" \
+    && ./configure CFLAGS="-Os" CXXFLAGS="-Os" \
        --disable-wallet \
        --without-gui \
        --without-miniupnpc \
        --disable-tests \
        --disable-bench \
     && make \
-    && strip src/bitcoind src/bitcoin-cli \
+    && strip src/bitcoind src/bitcoin-cli src/bitcoin-tx \
     && make install
  WORKDIR ../
 
