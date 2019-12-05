@@ -1,7 +1,12 @@
 # docker-bitcoin
 Docker setup to run a full node for Bitcoin
 
-One reason to prefer this image over others, is the others rely upon an unofficial Ubuntu PPA, rather than the original source code.
+Reasons to use this image:
+- other images rely upon an unofficial Ubuntu PPA, rather than the original source code
+- no fuss configuration:
+  - `bitcoin.conf` file starts with a reasonaable configuration
+  - `docker-compose.yml` sets up a volume to persist the blockchain data and exposes the ports
+  - `make` commands take care of various fiddly things
 
 ## Quickstart guide
 - install Docker: [Mac](https://www.docker.com/docker-mac) | [Ubuntu](https://www.docker.com/docker-ubuntu)
