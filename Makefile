@@ -14,8 +14,12 @@ help:
 	@echo ""
 	@echo "DEBUGGING:"
 	@echo "logs              Re-attach to logging output"
+	@echo "ps                List running container info"
 	@echo "bash              Bash inside bitcoind container"
 	@echo "status            Blockchain status info from bitcoind"
+	@echo ""
+	@echo "DATA:"
+	@echo "nuke_blockchain   Delete blockchain data"
 	@echo ""
 	@echo "MAINTENANCE:"
 	@echo "clean             Delete stopped containers and dangling images"
@@ -63,6 +67,10 @@ bash:
 	@echo "bash in bitcoind container:";\
 	docker-compose exec bitcoind bash
 
+.PHONY: ps
+ps:
+	docker-compose ps
+
 .PHONY: status
 status:
 	@docker-compose exec bitcoind bash -c "\
@@ -71,6 +79,14 @@ status:
 	    --rpcpassword=$(rpcpassword) \
 	    getblockchaininfo\
 	"
+
+.PHONY: nuke_blockchain
+nuke_blockchain:
+	@read -r -p "WARNING: this will delete all blockchain data (ctrl-c to exit / any other key to continue)." input
+	@make down
+	@docker-compose rm --force --stop -v bitcoind
+	@docker volume rm docker-bitcoin_bitcoin-data
+	@echo "Bitcoin blockchain deleted 💣"
 
 .PHONY: clean
 clean:
