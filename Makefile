@@ -79,3 +79,12 @@ clean:
 	@echo "Deleting dangling images..."
 	docker images -q -f dangling=true | xargs docker rmi
 	@echo "All clean 🛀"
+
+.PHONY: pull
+pull:
+	@echo "Pulling image from Docker Hub..."
+	@docker pull chanhosuh/bitcoin
+	@echo "Re-tagging as docker-bitcoin_bitcoind"
+	@docker tag chanhosuh/bitcoin docker-bitcoin_bitcoind
+	@docker rmi chanhosuh/bitcoin
+
