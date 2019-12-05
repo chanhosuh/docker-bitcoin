@@ -1,16 +1,19 @@
 # docker-bitcoin
 Docker setup to run a full node for Bitcoin
 
-One reason to prefer this image over others, is the others use the Ubuntu PPA, rather than the original source code.
-
-Building from source can take a while, anywhere from 20-30 minutes in my experience.  You can pull the image first, e.g. `docker pull chanhosuh/bitcoin` and once you're satisfied it does what you need, you can use this repo to build the image yourself.
+One reason to prefer this image over others, is the others rely upon an unofficial Ubuntu PPA, rather than the original source code.
 
 ## Quickstart guide
 - install Docker: [Mac](https://www.docker.com/docker-mac) | [Ubuntu](https://www.docker.com/docker-ubuntu)
 - clone the repo
-- build the Docker image:
-  - `make build`
-  - only needs to be done the first time or when docker-related files change
+- build (or pull) the Docker image:
+  - **build**
+    - `make build`
+    - only needs to be done the first time or when docker-related files change
+  - **pull**
+    - `make pull`
+    - building the image can take a while (~15 minutes for me), so this is useful for checking out the image before building it yourself
+    - note the image gets re-tagged so that it can be used with the `make` commands
 - start the container:
   - `make up` 
   - ctrl-c will detach you from the logging output; container will still be running in the background
