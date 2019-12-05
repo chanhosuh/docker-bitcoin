@@ -1,7 +1,5 @@
 .DEFAULT_GOAL := help
 
-include bitcoind/bitcoin.conf
-
 .PHONY: help
 help:
 	@echo ""
@@ -73,11 +71,9 @@ ps:
 
 .PHONY: status
 status:
-	@docker-compose exec bitcoind bash -c "\
+	@docker-compose exec --user root bitcoind bash -c "\
 	    bitcoin-cli \
-	    --rpcuser=$(rpcuser) \
-	    --rpcpassword=$(rpcpassword) \
-	    getblockchaininfo\
+	    getblockchaininfo \
 	"
 
 .PHONY: nuke_blockchain
