@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libboost-system-dev \
         libboost-filesystem-dev \
         libboost-chrono-dev \
+        libboost-program-options-dev \
         libboost-test-dev \
         libboost-thread-dev \
         libevent-dev \
