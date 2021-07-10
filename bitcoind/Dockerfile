@@ -30,7 +30,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # luckily, GitHub provides a URL which will redirect to
 # a URL with the release version number.
 ENV release_url https://github.com/bitcoin/bitcoin/releases/latest
-RUN curl "${release_url}" -sLIo /dev/null -w '%{url_effective}' | grep -o '[^/]*$' > ./release_version
+# RUN curl "${release_url}" -sLIo /dev/null -w '%{url_effective}' | grep -o '[^/]*$' > ./release_version
+RUN echo "v0.20.1" > ./release_version
 RUN echo "*** release version: `cat ./release_version` ***"
 
 # Clone source repo into bitcoin directory
